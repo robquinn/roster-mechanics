@@ -1,7 +1,7 @@
 {
   "name": "roster-mechanics",
   "version": "1.0.0",
-  "description": "An Employee Roster Management tool that links together Multiple Google APIs and Apps",
+  "description": "A Russ Lyon Sotheby's International Realty Google Apps Script project to manage employees and maintian a company roster.",
   "keywords": [
     "roster",
     "mechanics",
