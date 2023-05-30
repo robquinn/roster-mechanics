@@ -1,0 +1,32 @@
+.clasp.json
+.git
+.husky
+build
+docs
+dist
+node_modules
+# types/**/*.d.ts
+# .clasp.json
+.clasprc.json
+# .eslintrc.js
+.eslintrc.cjs
+.editorconfig
+.eslintcache
+# .eslintrc.json
+.gitignore
+.lintstagedrc.js
+# .prettierrc.js
+babel.config.js
+# jest.config.js
+# jest.config.cjs
+package-lock.json
+LICENSE
+package.json
+README.md
+tsconfig.eslint.json
+tsconfig.json
+yarn.lock
+appsscript.form-delete.js
+appsscript.form-suspend.js
+appsscript.form-hire-update.js
+appsscript.sheet.js

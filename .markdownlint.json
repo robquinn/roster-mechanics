@@ -1,0 +1,28 @@
+{
+  "no-inline-html": {
+    "allowed_elements": [
+      "link",
+      "meta",
+      "div",
+      "img",
+      "a",
+      "p",
+      "ol",
+      "ul",
+      "li",
+      "i",
+      "b",
+      "span",
+      "h1",
+      "h2",
+      "h3",
+      "h4",
+      "h5",
+      "h6"
+    ]
+  },
+  "default": true,
+  "MD003": { "style": "atx_closed" },
+  "MD007": { "indent": 4 },
+  "no-hard-tabs": false
+}

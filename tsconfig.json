@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "src/*": ["./src/*"]
+    },
+    "lib": ["ES2021.String", "ES2015", "DOM", "ES6"],
+    "strictNullChecks": true,
+    "target": "ES6",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "module": "CommonJS",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "types": ["node", "google-apps-script", "google-apps-script-oauth2"],
+    "typeRoots": ["node_modules/@types", "types"]
+  },
+  "include": ["src", "types", "test"],
+  "exclude": ["node_modules"]
+}

@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "src",
+    "types",
+    "test",
+    ".eslintrc.js",
+    ".lintstagedrc.js",
+    "appsscript.form.js",
+    "appsscript.sheet.js",
+    "jest.config.ts",
+    "webpack.config.js",
+    "babel.config.cjs"
+  ]
+}

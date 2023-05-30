@@ -1,0 +1,10 @@
+Project:
+  ☐ Make more functions async
+  Git:
+    ☐ Trunk based development
+  Testing:
+    ☐ Unit tests
+    ☐ Integration tests
+    ☐ Make user data fake and prepare for public facing
+    ☐ Make more tests dynamic (cases.forEach(() => {}))
+    ☐ Integrate Suspend and Delete forms
