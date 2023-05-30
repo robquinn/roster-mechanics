@@ -1,6 +1,6 @@
 # Roster Mechanics
 
-A Russ Lyon Sotheby's International Realty Google Apps Script project to manage employees and maintian a company roster.
+A Russ Lyon Sotheby's International Realty Google Apps Script project to manage employees and maintain a company roster.
 
   <p align="center">
   <a href="" rel="noopener">
