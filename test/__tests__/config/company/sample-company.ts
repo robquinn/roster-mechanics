@@ -7,15 +7,6 @@ beforeAll(async () => {
   SampleCompanyConfig = await SampleCompanyConfigUnAwaited.default
 })
 describe('SampleCompanyConfig', () => {
-  it('should have property "accouting" and child properties"', () => {
-    expect(SampleCompanyConfig).toHaveProperty('accounting')
-    expect(SampleCompanyConfig.accounting).toHaveProperty('folders')
-    expect(SampleCompanyConfig.accounting.folders).toHaveProperty('agentActionFormPDF')
-    expect(SampleCompanyConfig.accounting.folders.agentActionFormPDF).toHaveProperty('parentFolderId')
-    expect(SampleCompanyConfig.accounting.folders.agentActionFormPDF.parentFolderId).toBe(
-      process.env.GOOGLE_DRIVE_ACCOUNTING_AGENT_ACTION_FORM_PARENT_FOLDER_ID,
-    )
-  })
   it('should have property "accounting" and child properties"', () => {
     expect(SampleCompanyConfig).toHaveProperty('accounting')
     expect(SampleCompanyConfig.accounting).toHaveProperty('drives')
@@ -40,8 +31,8 @@ describe('SampleCompanyConfig', () => {
   })
   it('should have property "sever" and child properties"', () => {
     expect(SampleCompanyConfig).toHaveProperty('sever')
-    expect(SampleCompanyConfig.sever).toHaveProperty('email')
-    expect(typeof SampleCompanyConfig.sever.email === 'string').toBe(true)
+    expect(SampleCompanyConfig.sever).toHaveProperty('emails')
+    expect(Array.isArray(SampleCompanyConfig.sever.emails)).toBe(true)
   })
   it('should have property "users" and child properties"', () => {
     expect(SampleCompanyConfig).toHaveProperty('users')

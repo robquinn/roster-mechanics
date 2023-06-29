@@ -49,11 +49,6 @@ declare namespace RosterMechanics {
           testing: string[]
         }
         accounting: {
-          folders: {
-            agentActionFormPDF: {
-              parentFolderId: string
-            }
-          }
           drives: {
             shared: {
               folderId: string
@@ -64,7 +59,7 @@ declare namespace RosterMechanics {
           emails: string[]
         }
         sever: {
-          email: string
+          emails: string[]
         }
         calendars: {
           company: {

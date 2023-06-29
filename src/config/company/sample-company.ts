@@ -77,11 +77,6 @@ const SampleCompanyConfig: RosterMechanics.Config.Company.Sample = (async () => 
         },
       },
       accounting: {
-        folders: {
-          agentActionFormPDF: {
-            parentFolderId: process.env.GOOGLE_DRIVE_ACCOUNTING_AGENT_ACTION_FORM_PARENT_FOLDER_ID as string,
-          },
-        },
         drives: {
           shared: {
             folderId: process.env.GOOGLE_DRIVE_ACCOUNTING_DRIVE_FOLDER_ID as string,
@@ -96,7 +91,7 @@ const SampleCompanyConfig: RosterMechanics.Config.Company.Sample = (async () => 
         ],
       },
       sever: {
-        email: 'sever.email.recipient.1@somedomain.com',
+        emails: ['sever.email.recipient.1@somedomain.com'],
       },
       calendars: {
         company: {

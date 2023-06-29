@@ -35,6 +35,7 @@ const upsertUser: RosterMechanics.GoogleApps.Admin.Fn.UpsertUser = async (
       oldUser: existingUser as RosterMechanics.GoogleApps.Admin.Schema.GoogleUser,
       newUser: googleUserObj,
     })
+    await saveCriticalNewHirePDF(googleUser)
 
     return await Promise.resolve({ user: updatedUser, action: 'update' })
   }
@@ -50,6 +51,7 @@ const upsertUser: RosterMechanics.GoogleApps.Admin.Fn.UpsertUser = async (
           oldUser: existingUser,
           newUser: googleUserObj,
         })
+        await saveCriticalNewHirePDF(googleUser)
 
         // console.log('User %s updated with ID %s.', user.primaryEmail, user.id)
         resolve({ user, action: 'update' })

@@ -11,8 +11,9 @@ const TerserPlugin = require('terser-webpack-plugin')
 const webpack = require('webpack')
 const { fileURLToPath } = require('url')
 const CircularDependencyPlugin = require('circular-dependency-plugin')
+const Dotenv = require('dotenv-webpack')
 
-const dotenv = require('dotenv').config()
+// const dotenv = require('dotenv').config()
 
 // const __filename = fileURLToPath(import.meta.url)
 // const __dirname = path.dirname(__filename)
@@ -56,9 +57,7 @@ const commonConfig = {
     libraryTarget: 'this',
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': JSON.stringify(dotenv.parsed),
-    }),
+    new Dotenv(),
     new GenerateJsonPlugin('form-hire-update/appsscript.json', AppsScriptFormHireUpdateJson),
     new GenerateJsonPlugin('form-suspend/appsscript.json', AppsScriptFormSuspendJson),
     new GenerateJsonPlugin('form-delete/appsscript.json', AppsScriptFormDeleteJson),

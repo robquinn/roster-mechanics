@@ -1,4 +1,4 @@
-import { beforeAll, describe, expect, it, jest } from '@jest/globals'
+import { beforeAll, beforeEach, describe, expect, it, jest } from '@jest/globals'
 import RussLyonConfig from '../../../../../src/config/company/russ-lyon'
 import GoogleUser from '../../../../../src/libs/google-apps/admin/google-user'
 import * as savePDFtoSharedDrive from '../../../../../src/libs/google-apps/drive/save-pdf-to-shared-drive'
@@ -15,6 +15,10 @@ beforeAll(async () => {
   await googleUser.init()
 })
 
+beforeEach(() => {
+  jest.resetAllMocks()
+  jest.resetModules()
+})
 describe('saveCriticalNewHirePDF', () => {
   it('should call "googleUser.getUser()" & "googleUser.getAgentActionPDF()""', async () => {
     const getUserSpy = jest.spyOn(Object.getPrototypeOf(googleUser), 'getUser')
@@ -23,7 +27,7 @@ describe('saveCriticalNewHirePDF', () => {
     await saveCriticalNewHirePDF(googleUser)
 
     expect(getUserSpy).toHaveBeenCalledTimes(4)
-    expect(getAgentActionPDFSpy).toHaveBeenCalledTimes(1)
+    expect(getAgentActionPDFSpy).toHaveBeenCalledTimes(3)
   })
   it('should call "savePDFtoSharedDrive" with proper args', async () => {
     const savePDFtoSharedDriveSpy = jest.spyOn(savePDFtoSharedDrive, 'default')

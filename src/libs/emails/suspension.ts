@@ -21,9 +21,11 @@ export default class SuspensionEmail implements ISuspensionEmail {
       office,
       board,
     })
-    GmailApp.sendEmail((await RussLyonConfig).sever.email, `SEVER: ${firstName} ${lastName}`, html, {
-      from: 'derek.zieder@russlyon.com',
-      htmlBody: html,
+    ;(await RussLyonConfig).sever.emails.forEach((email) => {
+      GmailApp.sendEmail(email, `SEVER: ${firstName} ${lastName}`, html, {
+        from: 'derek.zieder@russlyon.com',
+        htmlBody: html,
+      })
     })
   }
 

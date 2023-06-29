@@ -4,7 +4,11 @@ import savePDFtoSharedDrive from '../../google-apps/drive/save-pdf-to-shared-dri
 const saveCriticalNewHirePDF: RosterMechanics.Wrapper.Drive.Fn.SaveCriticalNewHirePDF = async (
   googleUser: RosterMechanics.GoogleApps.Admin.IGoogleUser,
 ): Promise<void> => {
-  if (!(await RussLyonConfig).users.testing.includes(googleUser.getUser().primaryEmail as string)) {
+  if (
+    !(await RussLyonConfig).users.testing.includes(googleUser.getUser().primaryEmail as string) &&
+    googleUser.getAgentActionPDF() != null &&
+    googleUser.getAgentActionPDF()[0].length > 0
+  ) {
     savePDFtoSharedDrive({
       fileId: googleUser.getAgentActionPDF()[0],
       folderId: (await RussLyonConfig).accounting.drives.shared.folderId,
