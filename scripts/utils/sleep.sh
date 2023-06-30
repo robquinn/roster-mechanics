@@ -1,4 +1,5 @@
-﻿#! /bin/sh
+﻿#! /bin/bash
+
 # Powershell Script To Sleep
 
 # sleep for 2 seconds

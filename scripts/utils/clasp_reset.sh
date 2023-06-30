@@ -1,4 +1,5 @@
-#! /bin/sh
+#! /bin/bash
+
 # Script to reset .clasp.json
 
 # Remove the values from env vars in .env

@@ -1,4 +1,5 @@
 #! /bin/bash
+
 # Script to generate .env.example
 
 # Env Vars NOT to remove values from

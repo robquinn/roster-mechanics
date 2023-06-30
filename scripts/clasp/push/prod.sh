@@ -1,4 +1,5 @@
-﻿#! /bin/sh
+﻿#! /bin/bash
+
 # Script To Push FormApp
 
 # set scriptId and rootDir to the "Roster Mechanics (Form Hire/Update)" script for clasp
