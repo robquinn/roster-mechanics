@@ -1,6 +1,6 @@
 import RussLyonConfig from '../../../config/company/russ-lyon'
 import getActualOffice from '../../utils/general/get-actual-office'
-import insertUserAsMember from './insert-user-as-memeber'
+import insertUserAsMember from './insert-user-as-member'
 
 const insertUser: RosterMechanics.GoogleApps.Admin.Fn.InsertUser = async (
   user: RosterMechanics.GoogleApps.Admin.Schema.GoogleUser,
@@ -22,8 +22,14 @@ const insertUser: RosterMechanics.GoogleApps.Admin.Fn.InsertUser = async (
 
           const allInOfficeGroupEmail = RussLyonConfigAwaited.offices[userOffice].emails.allInOffice
           const allAgentsInOfficeGroupEmail = RussLyonConfigAwaited.offices[userOffice].emails.allAgentsInOffice
-          insertUserAsMember({ user: newUser, groupEmail: allInOfficeGroupEmail })
-          insertUserAsMember({ user: newUser, groupEmail: allAgentsInOfficeGroupEmail })
+          const allNinjasInOfficeGroupEmail = RussLyonConfigAwaited.offices[userOffice].emails.ninjasInOffice
+
+          const groupEmails = [allInOfficeGroupEmail, allAgentsInOfficeGroupEmail, allNinjasInOfficeGroupEmail]
+
+          groupEmails.forEach((groupEmail) => {
+            insertUserAsMember({ user: newUser, groupEmail })
+          })
+
           // GoogleCalendar.addUserToCompanyCalendar({ email: newUser.primaryEmail })
           // GoogleCalendar.shareCalendar({ email: newUser.primaryEmail })
           // GoogleCalendar.addRlsirCalendar({ user: newUser })

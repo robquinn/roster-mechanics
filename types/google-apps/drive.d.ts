@@ -17,7 +17,7 @@ declare namespace RosterMechanics {
           licenseNumber,
           topFolderName,
         }: {
-          fileId: string
+          fileId: string | null
           folderId: string
           firstName: string
           lastName: string

@@ -1,4 +1,4 @@
-﻿#! /bin/bash
+#! /bin/bash
 
 # Script To Push FormApp
 

@@ -15,6 +15,7 @@ const updateUser: RosterMechanics.GoogleApps.Admin.Fn.UpdateUser = async ({
   console.log('update', newU)
   return await new Promise((resolve, reject) => {
     try {
+      ;(newU.customSchemas as ICustomSchema).Roster.Created_At = oldUser.customSchemas?.Roster.Created_At as string
       ;(newU.customSchemas as ICustomSchema).Roster.Updated_At = new Date(Date.now()).toString()
 
       delete newU.changePasswordAtNextLogin

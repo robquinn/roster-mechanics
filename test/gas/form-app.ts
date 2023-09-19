@@ -25,6 +25,7 @@ export default class FormApp implements IFormApp {
   openById(id: string): RosterMechanics.Test.Form.IForm {
     return new Form([
       new FormResponse({
+        respondentEmail: 'someemail@somecompany.com',
         id,
         editResponseUrl:
           'https://docs.google.com/forms/d/e/1FAIpQLSfcw0zYx2SRFolsdfkpIIffHRpeCsS28ZkxKPmS05KJvQafIg/viewform?edit2=2_ABaOnufRVmu4NgYYmbrfjJJipEiRG9UosdfMRqWySNC3Ahue95a9fGdz8qoW6x0gze9HBwA',
@@ -73,6 +74,7 @@ export default class FormApp implements IFormApp {
         timestamp: new GasDate(new Date(Date.now())),
       }),
       new FormResponse({
+        respondentEmail: 'someemail@somecompany.com',
         id: 'asdUfu9l_Cjsxp7ic7345uUwmzytZ-2kHjeifqrYDibM',
         editResponseUrl:
           'https://docs.google.com/forms/d/e/1FAIpQasdfcw0zYx2SRFolsdfkpIIffHRpeCsS28ZkxKPmS05KJvQafIg/viewform?edit2=2_ABaOnufRVmu4NgYYmbrfjJJipEiRG9UoasdMRqWySNC3Ahue95a9fGdz8qoW6x0gze9HBwA',

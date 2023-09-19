@@ -12,7 +12,7 @@ export default class GoogleUser implements IGoogleUser {
   constructor(formResponseObject: RosterMechanics.GoogleApps.Form.FormResponseHireUpdateObject) {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     this.formResponseObject = formResponseObject
-    this.agentActionFormPDF = formResponseObject?.agentActionFormPDF
+    this.agentActionFormPDF = formResponseObject?.agentActionFormPDF ?? null
   }
 
   public async init(): Promise<void> {

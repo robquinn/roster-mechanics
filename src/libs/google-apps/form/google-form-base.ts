@@ -47,6 +47,7 @@ export default abstract class GoogleFormBase implements IGoogleFormBase {
     return await new Promise((resolve) => {
       const formResponses = FormApp.openById(this.formId).getResponses()
       const formResponse = formResponses[formResponses.length - 1]
+      console.log(`User who submitted the form: ${formResponse.getRespondentEmail()}`)
       this.formResponse = formResponse
       resolve(formResponse)
     })

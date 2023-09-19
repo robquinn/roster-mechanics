@@ -41,7 +41,6 @@ export default class SuspensionEmail implements ISuspensionEmail {
     board: string
   }): Promise<string> {
     const first = firstName.toUpperCase()
-    // let preferredName = this.formResponse.preferredName.toUpperCase()
     const last = lastName.toUpperCase()
     return /* html */ `
     <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "https://www.w3.org/TR/html4/strict.dtd">

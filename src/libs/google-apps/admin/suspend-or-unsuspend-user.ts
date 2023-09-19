@@ -13,6 +13,7 @@ const suspendOrUnsuspendUser: RosterMechanics.GoogleApps.Admin.Fn.SuspendOrUnsus
   ;(user.customSchemas as ICustomSchema).Roster.Sever_Date = await ifEmptyThenNull(latestResponse.severDate)
   ;(user.customSchemas as ICustomSchema).Roster.Inactive_Reason = await ifEmptyThenNull(latestResponse.inactiveReason)
   ;(user.customSchemas as ICustomSchema).Roster.New_Brokerage = await ifEmptyThenNull(latestResponse.newBrokerage)
+  ;(user.customSchemas as ICustomSchema).Roster.Updated_At = new Date(Date.now()).toString()
 
   return await new Promise((resolve, reject) => {
     try {

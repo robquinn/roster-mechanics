@@ -6,6 +6,7 @@ declare namespace RosterMechanics {
         getEditResponseUrl: () => string
         getItemResponses: () => RosterMechanics.Test.ItemResponse.IItemResponse[]
         getTimestamp: () => RosterMechanics.Test.GasDate.IGasDate
+        getRespondentEmail: () => string
       }
     }
   }

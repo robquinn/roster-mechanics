@@ -26,8 +26,8 @@ describe('saveCriticalNewHirePDF', () => {
 
     await saveCriticalNewHirePDF(googleUser)
 
-    expect(getUserSpy).toHaveBeenCalledTimes(4)
-    expect(getAgentActionPDFSpy).toHaveBeenCalledTimes(3)
+    expect(getUserSpy).toHaveBeenCalledTimes(3)
+    expect(getAgentActionPDFSpy).toHaveBeenCalledTimes(2)
   })
   it('should call "savePDFtoSharedDrive" with proper args', async () => {
     const savePDFtoSharedDriveSpy = jest.spyOn(savePDFtoSharedDrive, 'default')

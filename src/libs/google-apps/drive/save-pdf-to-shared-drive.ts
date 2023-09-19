@@ -6,7 +6,7 @@ const savePDFtoSharedDrive: RosterMechanics.GoogleApps.Drive.Fn.SavePDFtoSharedD
   licenseNumber,
   topFolderName,
 }: {
-  fileId: string
+  fileId: string | null
   folderId: string
   firstName: string
   lastName: string
@@ -30,6 +30,9 @@ const savePDFtoSharedDrive: RosterMechanics.GoogleApps.Drive.Fn.SavePDFtoSharedD
   console.log('savePDFtoSharedDrive letter', letter)
 
   const nameOfNameFolder = `${lastName}, ${firstName} ${licenseNumber ?? 'N/A'}`
+  const nameOfAdreFolder = `ADRE ${lastName}, ${firstName}`
+  const nameOfNewHireFolder = `NEW HIRE DOCS ${lastName}, ${firstName}`
+
   console.log('savePDFtoSharedDrive nameOfNameFolder', nameOfNameFolder)
   const nameFolder = letter.getFoldersByName(nameOfNameFolder)
   console.log('saveToGoogleDrive nameFolder', nameFolder)
@@ -37,20 +40,37 @@ const savePDFtoSharedDrive: RosterMechanics.GoogleApps.Drive.Fn.SavePDFtoSharedD
   console.log('savePDFtoSharedDrive nameOfFile', nameOfFile)
 
   const createNameFolder = (blob?: GoogleAppsScript.Base.Blob): void => {
-    const newNameFolder = letter.createFolder(nameOfNameFolder)
+    let newNameFolder
+    try {
+      newNameFolder = letter.getFoldersByName(nameOfNameFolder).next()
+    } catch (err) {
+      newNameFolder = letter.createFolder(nameOfNameFolder)
+    }
+    try {
+      newNameFolder.getFoldersByName(nameOfAdreFolder).next()
+    } catch (err) {
+      newNameFolder.createFolder(nameOfAdreFolder)
+    }
+    try {
+      newNameFolder.getFoldersByName(nameOfNewHireFolder).next()
+    } catch (err) {
+      newNameFolder.createFolder(nameOfNewHireFolder)
+    }
     console.log('savePDFtoSharedDrive newNameFolder', newNameFolder)
 
     if (blob != null) {
-      newNameFolder.createFile(blob).setName(nameOfFile)
+      if (!newNameFolder.getFilesByName(nameOfFile).hasNext()) {
+        newNameFolder.createFile(blob).setName(nameOfFile)
+      }
     }
   }
 
-  if (fileId.length > 0) {
+  if (fileId != null && fileId.length > 0) {
     const templateFile = DriveApp.getFileById(fileId)
     const blob = templateFile.getBlob().getAs('application/pdf')
-    if (nameFolder.hasNext()) {
-      nameFolder.next().createFile(blob).setName(nameOfFile)
-    }
+    // if (nameFolder.hasNext()) {
+    //   nameFolder.next().createFile(blob).setName(nameOfFile)
+    // }
     createNameFolder(blob)
   } else {
     createNameFolder()

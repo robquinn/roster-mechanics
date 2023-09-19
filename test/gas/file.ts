@@ -22,6 +22,10 @@ export default class File implements IFile {
     return this
   }
 
+  getName(): string {
+    return this.name
+  }
+
   getBlob(): RosterMechanics.Test.Blob.IBlob {
     return this.blob
   }

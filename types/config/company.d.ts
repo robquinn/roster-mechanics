@@ -81,6 +81,7 @@ declare namespace RosterMechanics {
         allAgentsInOffice: string
         emails: string[]
         emailsCc: string[]
+        ninjasInOffice: string
         sever?: string[]
       }
 

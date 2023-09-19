@@ -5,6 +5,7 @@ declare namespace RosterMechanics {
         createFile: (blob: GoogleAppsScript.Base.BlobSource) => RosterMechanics.Test.File.IFile
         setName: (name: string) => RosterMechanics.Test.File.IFile
         getBlob: () => RosterMechanics.Test.Blob.IBlob
+        getName: () => string
       }
     }
   }

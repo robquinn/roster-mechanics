@@ -129,7 +129,7 @@ export default class NewHireEmail implements INewHire {
 
   /* eslint-disable */
   private async getMessageHtml(): Promise<string> {
-    let greeting = await NewHireEmail.getGreeting()
+    // let greeting = await NewHireEmail.getGreeting()
     let first = await capitalizeFirstChar(this.googleUser.name?.givenName as string)
     let preferredName = await capitalizeFirstChar(this.googleUser.customSchemas?.Roster.Preferred_Name as string)
     let last = await capitalizeFirstChar(this.googleUser.name?.familyName as string)
@@ -144,34 +144,35 @@ export default class NewHireEmail implements INewHire {
       link: this.googleUser.customSchemas?.Roster.ADRE_Link as string,
     })
 
-    let noAnswerMessage = '<b>No Answer Provided</b>'
+    let noAnswerMessage = 'No Answer Provided'
     console.log('this.emails.emailsCc ', this.emails.emailsCc)
     return new Promise((resolve, _reject) => {
       const messageHtml =
-        greeting +
-        '<br><br>' +
+        // greeting +
+        // '<br><br>' +
         'Please set up the following new ' +
         officeUpper +
         ' agent in all systems:<br><br>' +
-        "Affiliates: This agent has been hired into the Russ Lyon Sotheby's International Realty " +
-        officeUpper +
-        ' Office.<br><br>' +
-        "Answering Service: Please set up for Russ Lyon Sotheby's International Realty " +
+        // "Affiliates: This agent has been hired into the Russ Lyon Sotheby's International Realty " +
+        // officeUpper +
+        // ' Office.<br><br>' +
+        'Answering Service: Please set up for RLSIR ' +
         officeUpper +
         ' Office.\n\n' +
         '<br><br>' +
         'Office Admin: Please set up in all ' +
         officeUpper +
-        ' Office systems.<br><br>' +
-        'Accounting: Documents will be provided through Paycom agent onboarding system.<br><br>' +
-        'Agent profiles/accounts will be created for: agent email, Lyon Connect, ' +
-        '<a href="http://russlyon.com" target="_blank" class="href-tip" data-tippy-content="http://russlyon.com">russlyon.com</a>' +
-        ' ' +
-        ', dash (' +
-        '<a href="http://SIR.com" class="href-tip" data-tippy-content="http://SIR.com">SIR.com</a>' +
-        '), ' +
-        '<a href="http://LuxuryRealEstate.com" class="href-tip" data-tippy-content="http://LuxuryRealEstate.com">LuxuryRealEstate.com</a>' +
-        ', RNet Roster, Xpressdocs, Collateral Analytics.<br/><br/>' +
+        ' office systems and begin Paycom onboarding process.<br><br>' +
+        // 'Accounting: Documents will be provided through Paycom agent onboarding system.<br><br>' +
+        'Agent profiles and accounts will be created for applicable systems.<br><br>' +
+        // 'Agent profiles/accounts will be created for email, Lyon Connect, ' +
+        // '<a href="http://russlyon.com" target="_blank" class="href-tip" data-tippy-content="http://russlyon.com">russlyon.com</a>' +
+        // ' ' +
+        // ', dash (' +
+        // '<a href="http://SIR.com" class="href-tip" data-tippy-content="http://SIR.com">SIR.com</a>' +
+        // '), ' +
+        // '<a href="http://LuxuryRealEstate.com" class="href-tip" data-tippy-content="http://LuxuryRealEstate.com">LuxuryRealEstate.com</a>' +
+        // ', Company Roster, Xpressdocs, Collateral Analytics.<br/><br/>' +
         'ADRE License Name: ' +
         first +
         ' ' +
@@ -200,21 +201,21 @@ export default class NewHireEmail implements INewHire {
         (this.googleUser.customSchemas?.Roster.License_Number
           ? this.googleUser.customSchemas?.Roster.License_Number
           : noAnswerMessage) +
-        '<br>' +
-        'ADRE Link: ' +
-        (adreLink ? adreLink : noAnswerMessage) +
+        // '<br>' +
+        // 'ADRE Link: ' +
+        // (adreLink ? adreLink : noAnswerMessage) +
         '<br>' +
         'Hire Date: ' +
         hireDate +
-        '<br>' +
-        'License Expire Date: ' +
-        (licenseExpireDate ? licenseExpireDate : noAnswerMessage) +
+        // '<br>' +
+        // 'License Expire Date: ' +
+        // (licenseExpireDate ? licenseExpireDate : noAnswerMessage) +
         '<br>' +
         'PC or PLLC: ' +
         (this.googleUser.customSchemas?.Roster.PC_or_PLLC
           ? this.googleUser.customSchemas?.Roster.PC_or_PLLC
           : noAnswerMessage) +
-        '<br>' +
+        // '<br>' +
         // 'Lone Wolf Number: ' +
         // (this.formResponse.loneWolfNumber ? this.formResponse.loneWolfNumber : noAnswerMessage) +
         '<br>' +
@@ -235,8 +236,9 @@ export default class NewHireEmail implements INewHire {
         ' ' +
         last +
         '&body=' +
-        greeting +
-        '%0D%0DPlease join me in welcoming ' +
+        // greeting +
+        // '%0D%0DPlease join me in welcoming ' +
+        'Please join me in welcoming ' +
         preferredName +
         ' ' +
         last +

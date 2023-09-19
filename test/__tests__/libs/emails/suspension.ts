@@ -29,6 +29,8 @@ describe('SuspensionEmail', () => {
 
     expect(typeof html === 'string').toBe(true)
     expect(html.length > 100).toBe(true)
+    console.log('lastNamePicker', lastName)
+    console.log('htmlPicker', html)
     expect(html.includes(lastName.toUpperCase())).toBe(true)
     expect(html.includes(firstName.toUpperCase())).toBe(true)
     expect(html.includes(office)).toBe(true)

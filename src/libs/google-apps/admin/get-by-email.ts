@@ -3,7 +3,7 @@ const getByEmail: RosterMechanics.GoogleApps.Admin.Fn.GetByEmail = async (
 ): Promise<RosterMechanics.GoogleApps.Admin.Schema.GoogleUser> => {
   return await new Promise((resolve, reject) => {
     try {
-      const user = AdminDirectory?.Users?.get(email, {
+      const user = AdminDirectory?.Users?.get(email.trim(), {
         customFieldMask: 'Roster',
         projection: 'full',
         viewType: 'admin_view',

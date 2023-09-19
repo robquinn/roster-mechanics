@@ -1,6 +1,7 @@
 import RussLyonConfig from '../../../config/company/russ-lyon'
 import getActualOffice from '../../utils/general/get-actual-office'
-import insertUserAsMember from './insert-user-as-memeber'
+import insertUserAsMember from './insert-user-as-member'
+import removeUserAsMember from './remove-user-as-member'
 
 const updateUserGroups: RosterMechanics.GoogleApps.Admin.Fn.UpdateUserGroups = async ({
   oldUserData,
@@ -15,29 +16,13 @@ const updateUserGroups: RosterMechanics.GoogleApps.Admin.Fn.UpdateUserGroups = a
   )
   const allInOfficeGroupEmailOld = (await RussLyonConfig).offices[oldOffice].emails.allInOffice
   const allAgentsInOfficeGroupEmailOld = (await RussLyonConfig).offices[oldOffice].emails.allAgentsInOffice
+  const allNinjasInOfficeGroupEmailOld = (await RussLyonConfig).offices[oldOffice].emails.ninjasInOffice
 
-  try {
-    AdminDirectory?.Members?.remove(allInOfficeGroupEmailOld, oldUserData.id as string)
-    console.log('User (%s) has been removed from group (%s)', newUserData.primaryEmail, allInOfficeGroupEmailOld)
-  } catch (err) {
-    console.log(
-      'Error removing user (%s) from group (%s): (%s)',
-      newUserData.primaryEmail,
-      allInOfficeGroupEmailOld,
-      err,
-    )
-  }
-  try {
-    AdminDirectory?.Members?.remove(allAgentsInOfficeGroupEmailOld, oldUserData.id as string)
-    console.log('User (%s) has been removed from group (%s)', newUserData.primaryEmail, allAgentsInOfficeGroupEmailOld)
-  } catch (err) {
-    console.log(
-      'Error removing user (%s) from group (%s): (%s)',
-      newUserData.primaryEmail,
-      allInOfficeGroupEmailOld,
-      err,
-    )
-  }
+  const groupEmailsOld = [allInOfficeGroupEmailOld, allAgentsInOfficeGroupEmailOld, allNinjasInOfficeGroupEmailOld]
+
+  groupEmailsOld.forEach((groupEmail) => {
+    removeUserAsMember({ user: newUserData, groupEmail })
+  })
 
   // Adding new groups
   const newOffice = await getActualOffice(
@@ -45,8 +30,13 @@ const updateUserGroups: RosterMechanics.GoogleApps.Admin.Fn.UpdateUserGroups = a
   )
   const allInOfficeGroupEmailNew = (await RussLyonConfig).offices[newOffice].emails.allInOffice
   const allAgentsInOfficeGroupEmailNew = (await RussLyonConfig).offices[newOffice].emails.allAgentsInOffice
-  insertUserAsMember({ user: newUserData, groupEmail: allInOfficeGroupEmailNew })
-  insertUserAsMember({ user: newUserData, groupEmail: allAgentsInOfficeGroupEmailNew })
+  const allNinjasInOfficeGroupEmailNew = (await RussLyonConfig).offices[newOffice].emails.ninjasInOffice
+
+  const newGroupEmails = [allInOfficeGroupEmailNew, allAgentsInOfficeGroupEmailNew, allNinjasInOfficeGroupEmailNew]
+
+  newGroupEmails.forEach((groupEmail) => {
+    insertUserAsMember({ user: newUserData, groupEmail })
+  })
 }
 
 export default updateUserGroups

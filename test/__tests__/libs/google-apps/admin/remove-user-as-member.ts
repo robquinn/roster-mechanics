@@ -1,15 +1,15 @@
 import { beforeAll, describe, expect, it, jest } from '@jest/globals'
-import insertUserAsMember from '../../../../../src/libs/google-apps/admin/insert-user-as-member'
 import getActualOffice from '../../../../../src/libs/utils/general/get-actual-office'
 import RussLyonConfig from '../../../../../src/config/company/russ-lyon'
 import { sampleUser1 } from '../../../../samples/users'
+import removeUserAsMember from '../../../../../src/libs/google-apps/admin/remove-user-as-member'
 
 beforeAll(() => {
   jest.clearAllMocks()
   jest.restoreAllMocks()
 })
 
-describe('insertUserAsMember', () => {
+describe('removeUserAsMember', () => {
   it('should call console log with correct message if successful', async () => {
     const logSpy = jest.spyOn(console, 'log')
 
@@ -20,22 +20,22 @@ describe('insertUserAsMember', () => {
     const allAgentsInOfficeGroupEmail = (await RussLyonConfig).offices[userOffice].emails.allAgentsInOffice
     const allNinjasInOfficeGroupEmail = (await RussLyonConfig).offices[userOffice].emails.ninjasInOffice
 
-    insertUserAsMember({ user: sampleUser1(), groupEmail: allInOfficeGroupEmail })
-    insertUserAsMember({ user: sampleUser1(), groupEmail: allAgentsInOfficeGroupEmail })
-    insertUserAsMember({ user: sampleUser1(), groupEmail: allNinjasInOfficeGroupEmail })
+    removeUserAsMember({ user: sampleUser1(), groupEmail: allInOfficeGroupEmail })
+    removeUserAsMember({ user: sampleUser1(), groupEmail: allAgentsInOfficeGroupEmail })
+    removeUserAsMember({ user: sampleUser1(), groupEmail: allNinjasInOfficeGroupEmail })
 
     expect(logSpy).toHaveBeenCalledWith(
-      'User (%s) added to group email (%s).',
+      'User (%s) has been removed from group (%s)',
       sampleUser1()?.primaryEmail,
       allInOfficeGroupEmail,
     )
     expect(logSpy).toHaveBeenCalledWith(
-      'User (%s) added to group email (%s).',
+      'User (%s) has been removed from group (%s)',
       sampleUser1()?.primaryEmail,
       allAgentsInOfficeGroupEmail,
     )
     expect(logSpy).toHaveBeenCalledWith(
-      'User (%s) added to group email (%s).',
+      'User (%s) has been removed from group (%s)',
       sampleUser1()?.primaryEmail,
       allNinjasInOfficeGroupEmail,
     )

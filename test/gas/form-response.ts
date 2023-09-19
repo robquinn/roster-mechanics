@@ -5,22 +5,25 @@ export default class FormResponse implements IFormResponse {
   private readonly editResponseUrl
   private readonly itemResponses
   private readonly timestamp
-
+  private readonly respondentEmail
   constructor({
     id,
     editResponseUrl,
     itemResponses,
     timestamp,
+    respondentEmail,
   }: {
     id: string
     editResponseUrl: string
     itemResponses: RosterMechanics.Test.ItemResponse.IItemResponse[]
     timestamp: RosterMechanics.Test.GasDate.IGasDate
+    respondentEmail: string
   }) {
     this.id = id
     this.editResponseUrl = editResponseUrl
     this.itemResponses = itemResponses
     this.timestamp = timestamp
+    this.respondentEmail = respondentEmail
   }
 
   getId(): string {
@@ -38,7 +41,10 @@ export default class FormResponse implements IFormResponse {
     return this.itemResponses
   }
 
-  //   getRespondentEmail(): string {}
+  getRespondentEmail(): string {
+    return this.respondentEmail
+  }
+
   //   getResponseForItem(item: Item): ItemResponse {}
   getTimestamp(): RosterMechanics.Test.GasDate.IGasDate {
     return this.timestamp

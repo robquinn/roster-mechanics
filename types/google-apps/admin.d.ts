@@ -8,6 +8,7 @@ declare namespace RosterMechanics {
           data: GoogleAppsScript.AdminDirectory.Schema.Member | null
           error: unknown | null
         }
+        type RemoveUserAsMember = ({ user, groupEmail }: { user: Schema.GoogleUser; groupEmail: string }) => void
         type InsertUser = (user: Schema.GoogleUser) => Promise<Schema.GoogleUser>
         type ListAllUsersEmails = () => Promise<string[]>
         type ListAllUsers = (args?: { office: string | undefined }) => Promise<Schema.GoogleUser[]>
