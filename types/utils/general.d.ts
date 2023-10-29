@@ -2,6 +2,7 @@ declare namespace RosterMechanics {
   namespace Utils {
     namespace General {
       namespace Fn {
+        type IsNinja = (stringNinja: string) => Promise<boolean>
         type IsProd = () => Promise<boolean>
         type ExponentialBackoffSync = <T extends (...args: unknown[]) => ReturnType<T>>({
           action,

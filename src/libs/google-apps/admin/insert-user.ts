@@ -1,6 +1,9 @@
 import RussLyonConfig from '../../../config/company/russ-lyon'
 import getActualOffice from '../../utils/general/get-actual-office'
+import isNinja from '../../utils/general/is-ninja'
 import insertUserAsMember from './insert-user-as-member'
+
+type ICustomSchema = RosterMechanics.GoogleApps.Admin.Schema.ICustomSchema
 
 const insertUser: RosterMechanics.GoogleApps.Admin.Fn.InsertUser = async (
   user: RosterMechanics.GoogleApps.Admin.Schema.GoogleUser,
@@ -8,6 +11,7 @@ const insertUser: RosterMechanics.GoogleApps.Admin.Fn.InsertUser = async (
   let newUser: RosterMechanics.GoogleApps.Admin.Schema.GoogleUser
   const userToInsert = Object.assign(user, { password: 'Welcome123!', changePasswordAtNextLogin: true })
   const RussLyonConfigAwaited = await RussLyonConfig
+  const newUserIsNinja = await isNinja((userToInsert.customSchemas as ICustomSchema).Roster.Ninja)
   return await new Promise((resolve, reject) => {
     try {
       newUser =
@@ -24,11 +28,13 @@ const insertUser: RosterMechanics.GoogleApps.Admin.Fn.InsertUser = async (
           const allAgentsInOfficeGroupEmail = RussLyonConfigAwaited.offices[userOffice].emails.allAgentsInOffice
           const allNinjasInOfficeGroupEmail = RussLyonConfigAwaited.offices[userOffice].emails.ninjasInOffice
 
-          const groupEmails = [allInOfficeGroupEmail, allAgentsInOfficeGroupEmail, allNinjasInOfficeGroupEmail]
+          const groupEmails = [allInOfficeGroupEmail, allAgentsInOfficeGroupEmail]
 
           groupEmails.forEach((groupEmail) => {
             insertUserAsMember({ user: newUser, groupEmail })
           })
+
+          if (newUserIsNinja) insertUserAsMember({ user: newUser, groupEmail: allNinjasInOfficeGroupEmail })
 
           // GoogleCalendar.addUserToCompanyCalendar({ email: newUser.primaryEmail })
           // GoogleCalendar.shareCalendar({ email: newUser.primaryEmail })
@@ -37,7 +43,7 @@ const insertUser: RosterMechanics.GoogleApps.Admin.Fn.InsertUser = async (
           return true
         })
         .catch((err) => {
-          console.log('insertUser catch ERROR', err)
+          console.log('getActualOffice catch ERROR', err)
         })
     } catch (err) {
       console.log(

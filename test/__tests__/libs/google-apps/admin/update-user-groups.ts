@@ -88,9 +88,9 @@ describe('updateUserGroups', () => {
     expect(spyOnInsertUserAsMember).toHaveBeenCalledTimes(3)
   })
   it('should call insertUserAsMember', async () => {
-    const spyOnRemoeUserAsMember = jest.spyOn(removeUserAsMember, 'default')
+    const spyOnRemoveUserAsMember = jest.spyOn(removeUserAsMember, 'default')
     await updateUserGroups({ newUserData, oldUserData })
-    expect(spyOnRemoeUserAsMember).toHaveBeenCalledTimes(3)
+    expect(spyOnRemoveUserAsMember).toHaveBeenCalledTimes(3)
   })
   it('should call getActualOffice', async () => {
     const spyOnGetActualOffice = jest.spyOn(getActualOffice, 'default')
