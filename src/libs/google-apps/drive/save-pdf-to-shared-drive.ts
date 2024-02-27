@@ -36,7 +36,7 @@ const savePDFtoSharedDrive: RosterMechanics.GoogleApps.Drive.Fn.SavePDFtoSharedD
   console.log('savePDFtoSharedDrive nameOfNameFolder', nameOfNameFolder)
   const nameFolder = letter.getFoldersByName(nameOfNameFolder)
   console.log('saveToGoogleDrive nameFolder', nameFolder)
-  const nameOfFile = `${lastName} Critical New Hire Form.pdf`
+  const nameOfFile = `${lastName}, ${firstName} Critical New Hire Form.pdf`
   console.log('savePDFtoSharedDrive nameOfFile', nameOfFile)
 
   const createNameFolder = (blob?: GoogleAppsScript.Base.Blob): void => {

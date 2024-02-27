@@ -22,7 +22,7 @@ describe('SampleCompanyConfig', () => {
     expect(SampleCompanyConfig.calendars.company).toHaveProperty('calendarId')
     expect(SampleCompanyConfig.calendars.company.calendarId).toBe(process.env.GOOGLE_CALENDAR_COMPANY_ID)
     expect(SampleCompanyConfig.calendars.company).toHaveProperty('calendarName')
-    expect(SampleCompanyConfig.calendars.company.calendarName).toBe(process.env.GOOGLE_CALDENAR_COMPANY_NAME)
+    expect(SampleCompanyConfig.calendars.company.calendarName).toBe(process.env.GOOGLE_CALENDAR_COMPANY_NAME)
   })
   it('should have property "newHire" and child properties"', () => {
     expect(SampleCompanyConfig).toHaveProperty('newHire')

@@ -46,12 +46,7 @@ const insertUser: RosterMechanics.GoogleApps.Admin.Fn.InsertUser = async (
           console.log('getActualOffice catch ERROR', err)
         })
     } catch (err) {
-      console.log(
-        `Error Creating User (${user?.primaryEmail as string}) with ID (%s): %s.`,
-        user.primaryEmail,
-        user.primaryEmail,
-        err,
-      )
+      console.log(`Error Creating User (%s) with ID (%s): %s.`, user.primaryEmail, user.primaryEmail, err)
       reject(new Error(`Error Creating User (${user?.primaryEmail as string})`))
     }
   })

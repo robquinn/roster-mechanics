@@ -22,7 +22,7 @@ describe('savePDFtoSharedDrive', () => {
     const nameOfNameFolder = `${lastName}, ${firstName} ${licenseNumber ?? 'N/A'}`
     expect(logSpy).toHaveBeenCalledWith('savePDFtoSharedDrive nameOfNameFolder', nameOfNameFolder)
 
-    const nameOfFile = `${lastName} Critical New Hire Form.pdf`
+    const nameOfFile = `${lastName}, ${firstName} Critical New Hire Form.pdf`
     expect(logSpy).toHaveBeenCalledWith('savePDFtoSharedDrive nameOfFile', nameOfFile)
   })
 })

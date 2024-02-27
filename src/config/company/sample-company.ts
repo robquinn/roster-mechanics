@@ -27,6 +27,7 @@ const SampleCompanyConfig: RosterMechanics.Config.Company.Sample = (async () => 
               'office.email.recipient.cc.3@somedomain.com',
               'office.email.recipient.cc.4@somedomain.com',
             ],
+            ninjasInOffice: 'ninjas.in.office.email@somedomain.com',
             sever: [],
           },
         },
@@ -56,6 +57,7 @@ const SampleCompanyConfig: RosterMechanics.Config.Company.Sample = (async () => 
               'office.email.recipient.cc.4@somedomain.com',
             ],
             sever: [],
+            ninjasInOffice: 'ninjas.in.office.email@somedomain.com',
           },
         },
       },
@@ -96,7 +98,7 @@ const SampleCompanyConfig: RosterMechanics.Config.Company.Sample = (async () => 
       calendars: {
         company: {
           calendarId: process.env.GOOGLE_CALENDAR_COMPANY_ID as string,
-          calendarName: process.env.GOOGLE_CALDENAR_COMPANY_NAME as string,
+          calendarName: process.env.GOOGLE_CALENDAR_COMPANY_NAME as string,
         },
       },
     })

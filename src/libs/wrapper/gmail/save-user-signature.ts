@@ -34,14 +34,14 @@ const saveUserSignature: RosterMechanics.Wrapper.Gmail.Fn.SaveUserSignature = as
   await exponentialBackoffAsync({
     action: async () => {
       await gmailApi.patchSendAs({
-        firstName: googleUserObj?.name?.givenName as string,
+        firstName: googleUserObj?.customSchemas?.Roster.Preferred_Name as string,
         lastName: googleUserObj?.name?.familyName as string,
         userEmail: googleUserObj.primaryEmail as string,
         signatureHtml,
       })
     },
     maxNumTries: 10,
-    name: 'gmailApi.createFilter',
+    name: 'gmailApi.patchSendAs',
   })
 
   await Promise.resolve()

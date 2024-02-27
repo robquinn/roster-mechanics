@@ -6,7 +6,7 @@ docs
 dist
 node_modules
 # types/**/*.d.ts
-# .clasp.json
+.clasp.json
 .clasprc.json
 # .eslintrc.js
 .eslintrc.cjs
@@ -30,3 +30,4 @@ appsscript.form-delete.js
 appsscript.form-suspend.js
 appsscript.form-hire-update.js
 appsscript.sheet.js
+.vscode

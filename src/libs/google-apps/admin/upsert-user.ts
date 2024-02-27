@@ -4,6 +4,7 @@ import createJustListedFilter from '../../wrapper/gmail/create-just-listed-filte
 import saveUserSignature from '../../wrapper/gmail/save-user-signature'
 import sendNewHireEmail from '../../wrapper/gmail/send-new-hire-email'
 import sendWelcomeEmail from '../../wrapper/gmail/send-welcome-email'
+import addUserToCompanyCalendar from '../calendar/add-user-to-company-calendar'
 import getByEmail from './get-by-email'
 import getByQuery from './get-by-query'
 import insertUser from './insert-user'
@@ -66,6 +67,7 @@ const upsertUser: RosterMechanics.GoogleApps.Admin.Fn.UpsertUser = async (
         await saveCriticalNewHirePDF(googleUser)
         await sendWelcomeEmail(googleUserObj)
         await saveUserSignature(googleUserObj)
+        await addUserToCompanyCalendar(googleUserObj.primaryEmail as string)
         resolve({ user, action: 'insert' })
       })
   })
