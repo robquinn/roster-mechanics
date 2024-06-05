@@ -48,6 +48,7 @@ export default class GoogleFormHireUpdate extends GoogleFormBase implements IGoo
         reHireLastDateWithRlsir: objWithMetadata['Re-Hire Last Date with RLSIR'],
         recruitedFrom: objWithMetadata['Recruited From'],
         statusType: objWithMetadata['Status Type'],
+        joiningTeam: objWithMetadata['Will This Agent Be Joining a Team?'],
         charge395: objWithMetadata['Charge $395'],
         monthlyFees: objWithMetadata['Monthly Fees'],
         dateFeesToStart: objWithMetadata['Date Fees to Start'],

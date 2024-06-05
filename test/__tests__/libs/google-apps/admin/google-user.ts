@@ -80,6 +80,9 @@ describe('GoogleUser', () => {
     expect(googleUser.getUser().customSchemas?.Roster.Status_Type).toBe(
       await ifEmptyThenNull(formResponseObject.statusType),
     )
+    expect(googleUser.getUser().customSchemas?.Roster.Joining_Team).toBe(
+      await ifEmptyThenNull(formResponseObject.joiningTeam),
+    )
     // expect(googleUser.getUser().customSchemas?.Roster.Updated_At).toBe(new Date(Date.now()).toString())
   })
   it('should return Google User and all fields should be correct', () => {

@@ -16,6 +16,7 @@ declare namespace RosterMechanics {
           lastName,
           licenseNumber,
           topFolderName,
+          secondLevelFolder,
         }: {
           fileId: string | null
           folderId: string
@@ -23,6 +24,7 @@ declare namespace RosterMechanics {
           lastName: string
           licenseNumber: string
           topFolderName: string
+          secondLevelFolder: string | null
         }) => void
         type SaveSheetToGoogleDrive = () => Promise<void>
       }

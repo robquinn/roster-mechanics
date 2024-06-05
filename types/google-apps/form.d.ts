@@ -110,6 +110,7 @@ declare namespace RosterMechanics {
         recruitedFrom: string
         showOnRoster: Base.YesOrNo
         statusType: string
+        joiningTeam: string
         charge395: Base.YesOrNo
         monthlyFees: string
         dateFeesToStart: string
@@ -184,6 +185,7 @@ declare namespace RosterMechanics {
         ['Re-Hire Last Date with RLSIR']: string
         ['Recruited From']: string
         ['Status Type']: string
+        ['Will This Agent Be Joining a Team?']: string
         ['Charge $395']: Base.YesOrNo
         ['Monthly Fees']: string
         ['Date Fees to Start']: string

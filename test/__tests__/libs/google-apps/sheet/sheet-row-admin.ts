@@ -45,7 +45,7 @@ describe('sheetRowAdmin', () => {
   it('should call "ifNullThenEmptyElseValue', async () => {
     const ifNullThenEmptyElseValueSpy = jest.spyOn(ifNullThenEmptyElseValue, 'default')
     await sheetRowAdmin(sampleUser1())
-    expect(ifNullThenEmptyElseValueSpy).toHaveBeenCalledTimes(25)
+    expect(ifNullThenEmptyElseValueSpy).toHaveBeenCalledTimes(26)
     expect(ifNullThenEmptyElseValueSpy).toHaveBeenCalledWith(sampleUser1().name?.givenName)
     expect(ifNullThenEmptyElseValueSpy).toHaveBeenCalledWith(sampleUser1().name?.familyName)
     expect(ifNullThenEmptyElseValueSpy).toHaveBeenCalledWith(sampleUser1().primaryEmail)
@@ -64,6 +64,7 @@ describe('sheetRowAdmin', () => {
     expect(ifNullThenEmptyElseValueSpy).toHaveBeenCalledWith(sampleUser1().customSchemas?.Roster['Re-Hire'])
     expect(ifNullThenEmptyElseValueSpy).toHaveBeenCalledWith(sampleUser1().customSchemas?.Roster.Recruited_From)
     expect(ifNullThenEmptyElseValueSpy).toHaveBeenCalledWith(sampleUser1().customSchemas?.Roster.Status_Type)
+    expect(ifNullThenEmptyElseValueSpy).toHaveBeenCalledWith(sampleUser1().customSchemas?.Roster.Joining_Team)
     expect(ifNullThenEmptyElseValueSpy).toHaveBeenCalledWith(sampleUser1().customSchemas?.Roster.Charge_395)
     expect(ifNullThenEmptyElseValueSpy).toHaveBeenCalledWith(sampleUser1().customSchemas?.Roster.Monthly_Fees)
     expect(ifNullThenEmptyElseValueSpy).toHaveBeenCalledWith(sampleUser1().customSchemas?.Roster.Notes)

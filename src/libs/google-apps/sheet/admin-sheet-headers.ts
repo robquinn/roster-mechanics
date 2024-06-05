@@ -34,6 +34,7 @@ const adminSheetHeaders: RosterMechanics.GoogleApps.Sheet.Fn.AdminSheetHeaders =
       'Inactive Reason',
       'Special Status',
       'Status Type',
+      'Joining Team',
       // 'Hire Fee',
       'Charge $395',
       'Monthly Fees',

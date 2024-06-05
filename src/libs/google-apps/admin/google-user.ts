@@ -44,6 +44,7 @@ export default class GoogleUser implements IGoogleUser {
     const showOnRoster = (await ifEmptyThenNull(this.formResponseObject.showOnRoster)) === 'Yes'
     const exists = true
     const statusType = await ifEmptyThenNull(this.formResponseObject.statusType)
+    const joiningTeam = await ifEmptyThenNull(this.formResponseObject.joiningTeam)
     const specialStatus = statusType != null
     const charge395 = (await ifEmptyThenNull(this.formResponseObject.charge395)) === 'Yes'
     const monthlyFees = await ifEmptyThenNull(this.formResponseObject.monthlyFees)
@@ -95,6 +96,7 @@ export default class GoogleUser implements IGoogleUser {
           Exists: exists,
           Special_Status: specialStatus,
           Status_Type: statusType,
+          Joining_Team: joiningTeam,
           Charge_395: charge395,
           Monthly_Fees: monthlyFees,
           Notes: notes,

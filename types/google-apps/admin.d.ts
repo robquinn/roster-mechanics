@@ -145,6 +145,7 @@ declare namespace RosterMechanics {
             Show_on_Roster: boolean | null // boolean
             Exists: boolean | null // boolean
             Status_Type: string | null
+            Joining_Team: string | null
             Charge_395: boolean | null // boolean
             Monthly_Fees: string | null
             Notes: string | null

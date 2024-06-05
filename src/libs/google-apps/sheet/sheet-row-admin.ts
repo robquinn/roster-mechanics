@@ -51,6 +51,7 @@ const sheetRowAdmin: RosterMechanics.GoogleApps.Sheet.Fn.SheetRowAdmin = async (
   const specialStatus = await ifNullThenEmptyElseValue(user.customSchemas?.Roster.Special_Status)
 
   const statusType = await ifNullThenEmptyElseValue(user.customSchemas?.Roster.Status_Type)
+  const joiningTeam = await ifNullThenEmptyElseValue(user.customSchemas?.Roster.Joining_Team)
   const charge395 = await ifNullThenEmptyElseValue(user.customSchemas?.Roster.Charge_395)
   const monthlyFees = await ifNullThenEmptyElseValue(user.customSchemas?.Roster.Monthly_Fees)
 
@@ -92,6 +93,7 @@ const sheetRowAdmin: RosterMechanics.GoogleApps.Sheet.Fn.SheetRowAdmin = async (
       inactiveReason,
       specialStatus,
       statusType,
+      joiningTeam,
       // hireFee,
       charge395,
       monthlyFees,

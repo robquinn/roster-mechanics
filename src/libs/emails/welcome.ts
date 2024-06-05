@@ -1268,7 +1268,7 @@ export default class WelcomeEmail implements IWelcomeEmail {
 									text-align: center;
 								  "
 								>
-								  Cloze CRM and ActivePipe Email Marketing
+								  ActivePipe Email Marketing
 								</td>
 							  </tr>
 							  <tr>
@@ -1287,11 +1287,11 @@ export default class WelcomeEmail implements IWelcomeEmail {
 									padding: 0;
 								  "
 								>
-								  Russ Lyon is a proud partner of Cloze CRM and
-								  ActivePipe, two of the best customer relationship
+								  Russ Lyon is a proud partner of
+								  ActivePipe, one of the best customer relationship
 								  and marketing tools around. We have negotiated
 								  pricing with them which offer you the most
-								  features at a reduced cost. These two apps will
+								  features at a reduced cost. This app will
 								  help you keep your clients organized and you
 								  top-of-mind. We strongly encourage you to take
 								  advantage of both.<br />
@@ -1303,13 +1303,6 @@ export default class WelcomeEmail implements IWelcomeEmail {
 									"
 								  >
 									<a
-									  href="https://connect.russlyon.com/marketing/5e4988ab834b5d723b783196/order"
-									  style="
-										text-size-adjust: 100%;
-										text-decoration: none;
-									  "
-									  >Sign up for Cloze Here</a
-									><br /><a
 									  href="https://connect.russlyon.com/marketing/5e498c5a834b5d723b7831f4/order"
 									  style="
 										text-size-adjust: 100%;

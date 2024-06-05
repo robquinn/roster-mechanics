@@ -5,6 +5,7 @@ const savePDFtoSharedDrive: RosterMechanics.GoogleApps.Drive.Fn.SavePDFtoSharedD
   lastName,
   licenseNumber,
   topFolderName,
+  secondLevelFolder,
 }: {
   fileId: string | null
   folderId: string
@@ -12,6 +13,7 @@ const savePDFtoSharedDrive: RosterMechanics.GoogleApps.Drive.Fn.SavePDFtoSharedD
   lastName: string
   licenseNumber: string
   topFolderName: string
+  secondLevelFolder: string | null
 }): void => {
   console.log('savePDFtoSharedFolder new folderId =>', folderId)
   console.log('savePDFtoSharedFolder fileId', fileId)
@@ -19,14 +21,25 @@ const savePDFtoSharedDrive: RosterMechanics.GoogleApps.Drive.Fn.SavePDFtoSharedD
   console.log('savePDFtoSharedFolder lastName', lastName)
   console.log('savePDFtoSharedFolder licenseNumber', licenseNumber)
   console.log('savePDFtoSharedFolder topFolder', topFolderName)
-  // console.log('savePDFtoSharedFolder secondLevelFolder', secondLevelFolder)
+  console.log('savePDFtoSharedFolder secondLevelFolder', secondLevelFolder)
 
-  // Walk to correct file
-  const sharedDrive = DriveApp.getFolderById(folderId)
+  let sharedDrive
+  try {
+    sharedDrive = DriveApp.getFolderById(folderId)
+  } catch (err) {
+    console.error('savePDFtoSharedDrive getFolderById', err)
+    return
+  }
   const topLevel = sharedDrive.getFoldersByName(topFolderName).next()
-  console.log('savePDFtoSharedDrive topLevel.getFoldersByName.next()', topLevel)
-  // let paperwork = topLevel.getFoldersByName(secondLevelFolder).next()
-  const letter = topLevel.getFoldersByName(lastName.charAt(0).toUpperCase()).next()
+  console.log('savePDFtoSharedDrive topLevel', topLevel)
+
+  let paperwork = topLevel
+  if (secondLevelFolder != null && secondLevelFolder.length > 0) {
+    paperwork = topLevel.getFoldersByName(secondLevelFolder).next()
+  }
+
+  console.log('savePDFtoSharedDrive paperwork', paperwork)
+  const letter = paperwork.getFoldersByName(lastName.charAt(0).toUpperCase()).next()
   console.log('savePDFtoSharedDrive letter', letter)
 
   const nameOfNameFolder = `${lastName}, ${firstName} ${licenseNumber ?? 'N/A'}`

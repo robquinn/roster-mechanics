@@ -222,6 +222,11 @@ export default class NewHireEmail implements INewHire {
         'Licensed Assistant: ' +
         (this.googleUser.customSchemas?.Roster.Role?.includes('Licensed Assistant') ? 'Yes' : 'No') +
         '<br>' +
+        'Joining Team: ' +
+        (this.googleUser.customSchemas?.Roster.Joining_Team
+          ? this.googleUser.customSchemas?.Roster.Joining_Team
+          : noAnswerMessage) +
+        '<br>' +
         '<p>' +
         '<a href="mailto:' +
         this.emails.emails +

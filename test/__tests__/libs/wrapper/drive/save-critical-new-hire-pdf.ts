@@ -43,6 +43,7 @@ describe('saveCriticalNewHirePDF', () => {
       lastName: googleUser.getUser().name?.familyName as string,
       licenseNumber: googleUser.getUser().customSchemas?.Roster.License_Number as string,
       topFolderName: '#RL - Agent Paperwork',
+      secondLevelFolder: null,
     })
   })
 })
