@@ -25,7 +25,7 @@ const getSignatureHtml: RosterMechanics.GoogleApps.Gmail.Fn.GetSignatureHtml = a
 <td colspan="6">
   <font style="font-family:Verdana,'sans-serif';font-weight:normal;color:#000;font-size:15px;">${firstName} ${lastName}</font>
   <br />
-  <font style="font-family:Verdana,'sans-serif';color:#000;font-size:12px;font-weight:normal;">REALTOR®</font>
+  <font style="font-family:Verdana,'sans-serif';color:#000;font-size:12px;font-weight:normal;">Global Real Estate Advisor</font>
   <br /><br />
   <font style="font-family:Verdana,'sans-serif';color:#000;font-size:12px;">Russ Lyon Sotheby's International Realty
   <br />
