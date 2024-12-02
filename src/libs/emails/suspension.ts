@@ -178,7 +178,7 @@ export default class SuspensionEmail implements ISuspensionEmail {
                                         <p class="MsoNormal"></p>
                                         <p class="MsoNormal">
                                           The following systems will be updated: RNet Roster/Email, Russlyon.com,
-                                          SIR.com (will update overnight). LuxuryRealEstate.com, Toolkit, Lyon Connect,
+                                          SIR.com (will update overnight), Toolkit, Lyon Connect,
                                           Xpressdocs.
                                         </p>
                                         <p class="MsoNormal"></p>

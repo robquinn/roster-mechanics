@@ -1044,20 +1044,13 @@ export default class WelcomeEmail implements IWelcomeEmail {
 									  text-decoration: none;
 									"
 									>russlyon.com</span
-								  >,
+								  > &amp;
 								  <span
 									style="
 									  text-size-adjust: 100%;
 									  text-decoration: none;
 									"
 									>sir.com</span
-								  >, &amp;
-								  <span
-									style="
-									  text-size-adjust: 100%;
-									  text-decoration: none;
-									"
-									>luxre.com</span
 								  >
 								  for you.<br />
 								  <p style="text-align: center">
