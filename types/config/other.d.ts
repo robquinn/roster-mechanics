@@ -10,6 +10,10 @@ declare namespace RosterMechanics {
             labelName: string
             query: string
           }
+          agentDigest: {
+            labelName: string
+            query: string
+          }
         }
       }>
     }

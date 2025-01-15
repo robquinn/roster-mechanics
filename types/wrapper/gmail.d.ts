@@ -5,6 +5,9 @@ declare namespace RosterMechanics {
         type CreateJustListedFilter = (
           googleUserObj: RosterMechanics.GoogleApps.Admin.Schema.GoogleUser,
         ) => Promise<void>
+        type CreateAgentDigestFilter = (
+          googleUserObj: RosterMechanics.GoogleApps.Admin.Schema.GoogleUser,
+        ) => Promise<void>
         type SaveUserSignature = (googleUserObj: RosterMechanics.GoogleApps.Admin.Schema.GoogleUser) => Promise<void>
         type SendNewHireEmail = (googleUserObj: RosterMechanics.GoogleApps.Admin.Schema.GoogleUser) => Promise<void>
         type SendWelcomeEmail = (googleUserObj: RosterMechanics.GoogleApps.Admin.Schema.GoogleUser) => Promise<void>

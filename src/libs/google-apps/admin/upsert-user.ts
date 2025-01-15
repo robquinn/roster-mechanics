@@ -1,3 +1,4 @@
+import createAgentDigestFilter from 'src/libs/wrapper/gmail/create-agent-digest-filter'
 import handleReHire from '../../wrapper/company/handle-rehire'
 import saveCriticalNewHirePDF from '../../wrapper/drive/save-critical-new-hire-pdf'
 import createJustListedFilter from '../../wrapper/gmail/create-just-listed-filter'
@@ -59,10 +60,11 @@ const upsertUser: RosterMechanics.GoogleApps.Admin.Fn.UpsertUser = async (
         return true
       })
       .catch(async (err) => {
-        console.log(`AdminDirectory.User NOT FOUND by query PRIMARY EMAIL`, err)
+        console.log(`AdminDirectory. User NOT FOUND by query PRIMARY EMAIL`, err)
         console.log('Creating AdminDirectory.User...')
         const user = await insertUser(googleUserObj)
         await createJustListedFilter(googleUserObj)
+        await createAgentDigestFilter(googleUserObj)
         await sendNewHireEmail(googleUserObj)
         await saveCriticalNewHirePDF(googleUser)
         await sendWelcomeEmail(googleUserObj)

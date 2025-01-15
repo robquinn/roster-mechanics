@@ -13,6 +13,11 @@ const EmailConfig: RosterMechanics.Config.Other.Email = (async () => {
           labelName: '***Just Listed***',
           query: 'from:(noreplymail@xpressdocs.com) Marketing Campaign Ready',
         },
+        agentDigest: {
+          labelName: '***Agent Digest***',
+          query:
+            'to:(agents.camelback@russlyon.com OR agents.carefree@russlyon.com OR agents.desertmountain@russlyon.com OR agents.flagstaff@russlyon.com OR agents.pinnaclepeak@russlyon.com OR agents.prescott@russlyon.com OR agents.sedona@russlyon.com OR agents.sev@russlyon.com OR agents.tubac@russlyon.com OR agents.tucson@russlyon.com OR agents.westvalley@russlyon.com OR agents.maricopa@russlyon.com)',
+        },
       },
     })
   })

@@ -14,7 +14,15 @@ declare namespace RosterMechanics {
           userEmail: string
           signatureHtml: string
         }) => Promise<Response.Body.PatchSendAs>
-        createFilter: ({ query, labelName }: { query: string; labelName: string }) => Promise<void>
+        createFilter: ({
+          query,
+          labelName,
+          skipInbox,
+        }: {
+          query: string
+          labelName: string
+          skipInbox: boolean
+        }) => Promise<void>
       }
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       interface Label extends GoogleAppsScript.Gmail.Schema.Label {}

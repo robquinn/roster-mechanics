@@ -3,7 +3,7 @@ import GmailApi from '../../google-apis/gmail'
 import GoogleServiceAccount from '../../google-apis/service-account'
 import exponentialBackoffAsync from '../../utils/general/exponential-backoff-async'
 
-const createJustListedFilter: RosterMechanics.Wrapper.Gmail.Fn.CreateJustListedFilter = async (
+const createAgentDigestFilter: RosterMechanics.Wrapper.Gmail.Fn.CreateAgentDigestFilter = async (
   googleUserObj: RosterMechanics.GoogleApps.Admin.Schema.GoogleUser,
 ): Promise<void> => {
   // Google Service Account needed to impersonate new user & configure their gmail account
@@ -22,8 +22,8 @@ const createJustListedFilter: RosterMechanics.Wrapper.Gmail.Fn.CreateJustListedF
   await exponentialBackoffAsync({
     action: async () => {
       await gmailApi.createFilter({
-        query: (await EmailConfig).filters.justListed.query,
-        labelName: (await EmailConfig).filters.justListed.labelName,
+        query: (await EmailConfig).filters.agentDigest.query,
+        labelName: (await EmailConfig).filters.agentDigest.labelName,
         skipInbox: true,
       })
     },
@@ -34,4 +34,4 @@ const createJustListedFilter: RosterMechanics.Wrapper.Gmail.Fn.CreateJustListedF
   await Promise.resolve()
 }
 
-export default createJustListedFilter
+export default createAgentDigestFilter

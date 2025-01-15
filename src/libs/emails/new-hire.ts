@@ -227,6 +227,11 @@ export default class NewHireEmail implements INewHire {
           ? this.googleUser.customSchemas?.Roster.Joining_Team
           : noAnswerMessage) +
         '<br>' +
+        'Recruited From: ' +
+        (this.googleUser.customSchemas?.Roster.Recruited_From
+          ? this.googleUser.customSchemas?.Roster.Recruited_From
+          : noAnswerMessage) +
+        '<br>' +
         '<p>' +
         '<a href="mailto:' +
         this.emails.emails +

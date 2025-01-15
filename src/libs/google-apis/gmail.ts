@@ -1,5 +1,4 @@
 /* eslint-disable no-await-in-loop */
-
 type IGmailApi = RosterMechanics.GoogleApis.Gmail.IGmailApi
 
 export default class GmailApi implements IGmailApi {
@@ -85,7 +84,15 @@ export default class GmailApi implements IGmailApi {
     })) as RosterMechanics.GoogleApis.Gmail.Response.Body.PatchSendAs
   }
 
-  public async createFilter({ query, labelName }: { query: string; labelName: string }): Promise<void> {
+  public async createFilter({
+    query,
+    labelName,
+    skipInbox,
+  }: {
+    query: string
+    labelName: string
+    skipInbox: boolean
+  }): Promise<void> {
     // addDelegate({ userEmail: userEmail })
 
     let gmailGetLabelsResponse: RosterMechanics.GoogleApis.Gmail.Response.Body.ListLabels | null = null
@@ -128,6 +135,7 @@ export default class GmailApi implements IGmailApi {
         },
         action: {
           addLabelIds: filter.action.addLabelIds,
+          removeLabelIds: (skipInbox ? ['INBOX'] : []) as string[],
         },
       },
     }
