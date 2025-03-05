@@ -8,19 +8,27 @@ export default class GmailApi implements IGmailApi {
   }
 
   static Scopes(): string {
-    return (
-      'https://mail.google.com/' +
-      ' https://www.googleapis.com/auth/gmail.settings.basic' +
-      ' https://www.googleapis.com/auth/gmail.settings.sharing' +
-      ' https://www.googleapis.com/auth/gmail.modify' +
-      ' https://www.googleapis.com/auth/gmail.labels' +
-      ' https://www.googleapis.com/auth/gmail.readonly'
-      // ' https://www.googleapis.com/auth/gmail.metadata'
-    )
+    return [
+      'https://www.googleapis.com/auth/gmail.settings.basic',
+      'https://www.googleapis.com/auth/gmail.settings.sharing',
+      'https://www.googleapis.com/auth/gmail.modify',
+      'https://www.googleapis.com/auth/gmail.labels',
+      'https://www.googleapis.com/auth/gmail.readonly',
+    ].join(' ')
   }
 
   static Endpoints(params?: { sendAsEmail?: string }): RosterMechanics.GoogleApis.Gmail.Request.Endpoints {
     return {
+      sendEmail: {
+        url: `https://gmail.googleapis.com/gmail/v1/users/${params?.sendAsEmail as string}/messages/send`,
+        method: 'post',
+      },
+      getUserSignature: {
+        url: `https://gmail.googleapis.com/gmail/v1/users/${params?.sendAsEmail as string}/settings/sendAs/${
+          params?.sendAsEmail as string
+        }`,
+        method: 'get',
+      },
       listSendAs: {
         url: 'https://gmail.googleapis.com/gmail/v1/users/me/settings/sendAs',
         method: 'get',
@@ -33,7 +41,10 @@ export default class GmailApi implements IGmailApi {
         url: 'https://gmail.googleapis.com/gmail/v1/users/me/labels',
         method: 'post',
       },
-      listLabels: { url: 'https://gmail.googleapis.com/gmail/v1/users/me/labels', method: 'get' },
+      listLabels: {
+        url: 'https://gmail.googleapis.com/gmail/v1/users/me/labels',
+        method: 'get',
+      },
       createFilter: {
         url: 'https://gmail.googleapis.com/gmail/v1/users/me/settings/filters',
         method: 'post',
@@ -46,6 +57,77 @@ export default class GmailApi implements IGmailApi {
         url: 'https://gmail.googleapis.com/gmail/v1/users/me/messages',
         method: 'get',
       },
+    }
+  }
+
+  public async sendEmailAsUser({
+    fromEmail,
+    fromFirstName,
+    fromLastName,
+    toEmail,
+    subject,
+    body,
+  }: {
+    fromEmail: string
+    fromFirstName: string
+    fromLastName: string
+    toEmail: string
+    subject: string
+    body: string
+  }): Promise<void> {
+    const signature = await this.getUserSignature(fromEmail)
+    if (signature === '') {
+      throw new Error(`No signature found for ${fromEmail}. Email not sent.`)
+    }
+    const emailBody = `${body}\n\n${signature}` // Append signature
+
+    const emailContent =
+      `From: ${fromFirstName} ${fromLastName} <${fromEmail}>\r\n` +
+      `To: ${toEmail}\r\n` +
+      `Subject: ${subject}\r\n` +
+      `MIME-Version: 1.0\r\n` +
+      `Content-Type: text/html; charset="UTF-8"\r\n\r\n` +
+      `${emailBody}`
+
+    const rawEmail = Utilities.base64EncodeWebSafe(emailContent)
+
+    const payload = {
+      body: {
+        raw: rawEmail,
+      },
+    }
+
+    try {
+      await this.googleSA.run({
+        ...GmailApi.Endpoints({ sendAsEmail: fromEmail }).sendEmail,
+        payload: payload as {
+          body: RosterMechanics.GoogleApis.ServiceAccount.Request.Body
+        },
+      })
+      console.log(`Email sent from ${fromFirstName} ${fromLastName} (${fromEmail}) to ${toEmail} with signature.`)
+    } catch (err) {
+      console.log(`Failed to send email: ${String(err)}`)
+    }
+  }
+
+  public async getUserSignature(userEmail: string): Promise<string> {
+    try {
+      console.log(`Fetching email signature for: ${userEmail}`)
+
+      const response = (await this.googleSA.run({
+        ...GmailApi.Endpoints({ sendAsEmail: userEmail }).getUserSignature,
+      })) as RosterMechanics.GoogleApis.Gmail.Response.Body.GetUserSignature
+
+      console.log(`API Response for signature:`, response)
+
+      if (response?.signature !== '') {
+        return response.signature ?? ''
+      }
+      console.log(`No signature found for ${userEmail}. Response:`, response)
+      return ''
+    } catch (err) {
+      console.log(`Failed to fetch email signature for ${userEmail}:`, err)
+      return '' // Return an empty string if an error occurs
     }
   }
 
@@ -66,7 +148,9 @@ export default class GmailApi implements IGmailApi {
     userEmail: string
     signatureHtml: string
   }): Promise<RosterMechanics.GoogleApis.Gmail.Response.Body.PatchSendAs> {
-    const payload: { body: RosterMechanics.GoogleApis.Gmail.Request.Body.PatchSendAs } = {
+    const payload: {
+      body: RosterMechanics.GoogleApis.Gmail.Request.Body.PatchSendAs
+    } = {
       body: {
         sendAsEmail: userEmail,
         displayName: `${firstName} ${lastName}`,
@@ -80,7 +164,9 @@ export default class GmailApi implements IGmailApi {
     }
     return (await this.googleSA.run({
       ...GmailApi.Endpoints({ sendAsEmail: userEmail }).patchSendAs,
-      payload: payload as { body: RosterMechanics.GoogleApis.ServiceAccount.Request.Body },
+      payload: payload as {
+        body: RosterMechanics.GoogleApis.ServiceAccount.Request.Body
+      },
     })) as RosterMechanics.GoogleApis.Gmail.Response.Body.PatchSendAs
   }
 
@@ -128,7 +214,9 @@ export default class GmailApi implements IGmailApi {
     filter.action = Gmail.newFilterAction()
     filter.action.addLabelIds = [label.id as string]
 
-    const payloadCreateFilter: { body: RosterMechanics.GoogleApis.Gmail.Request.Body.CreateFilter } = {
+    const payloadCreateFilter: {
+      body: RosterMechanics.GoogleApis.Gmail.Request.Body.CreateFilter
+    } = {
       body: {
         criteria: {
           query: filter.criteria.query,
@@ -143,7 +231,9 @@ export default class GmailApi implements IGmailApi {
     try {
       ;(await this.googleSA.run({
         ...GmailApi.Endpoints().createFilter,
-        payload: payloadCreateFilter as { body: RosterMechanics.GoogleApis.ServiceAccount.Request.Body },
+        payload: payloadCreateFilter as {
+          body: RosterMechanics.GoogleApis.ServiceAccount.Request.Body
+        },
       })) as RosterMechanics.GoogleApis.Gmail.Response.Body.CreateFilter
     } catch (err) {
       console.log('createFilter', err)
@@ -165,7 +255,9 @@ export default class GmailApi implements IGmailApi {
       resource.addLabelIds = [(label as GoogleAppsScript.Gmail.Schema.Label).id as string]
       resource.removeLabelIds = []
 
-      const payloadBatchModifyMessages: { body: RosterMechanics.GoogleApis.Gmail.Request.Body.BatchModifyMessages } = {
+      const payloadBatchModifyMessages: {
+        body: RosterMechanics.GoogleApis.Gmail.Request.Body.BatchModifyMessages
+      } = {
         body: {
           ids: resource.ids,
           addLabelIds: resource.addLabelIds,
@@ -175,7 +267,9 @@ export default class GmailApi implements IGmailApi {
       try {
         ;(await this.googleSA.run({
           ...GmailApi.Endpoints().batchModifyMessages,
-          payload: payloadBatchModifyMessages as { body: RosterMechanics.GoogleApis.ServiceAccount.Request.Body },
+          payload: payloadBatchModifyMessages as {
+            body: RosterMechanics.GoogleApis.ServiceAccount.Request.Body
+          },
         })) as RosterMechanics.GoogleApis.Gmail.Response.Body.BatchModifyMessages
       } catch (err) {
         console.log('batchModifyMessages', err)
@@ -196,7 +290,9 @@ export default class GmailApi implements IGmailApi {
     labelColor.backgroundColor = backgroundColor
     resource.color = labelColor
 
-    const payload: { body: RosterMechanics.GoogleApis.Gmail.Request.Body.CreateLabel } = {
+    const payload: {
+      body: RosterMechanics.GoogleApis.Gmail.Request.Body.CreateLabel
+    } = {
       body: {
         labelListVisibility: resource.labelListVisibility,
         messageListVisibility: resource.messageListVisibility,
@@ -210,7 +306,9 @@ export default class GmailApi implements IGmailApi {
 
     const newLabel: RosterMechanics.GoogleApis.Gmail.Response.Body.CreateLabel = (await this.googleSA.run({
       ...GmailApi.Endpoints().createLabel,
-      payload: payload as { body: RosterMechanics.GoogleApis.ServiceAccount.Request.Body },
+      payload: payload as {
+        body: RosterMechanics.GoogleApis.ServiceAccount.Request.Body
+      },
     })) as RosterMechanics.GoogleApis.Gmail.Response.Body.CreateLabel
 
     return newLabel
@@ -225,7 +323,9 @@ export default class GmailApi implements IGmailApi {
   }): Promise<RosterMechanics.GoogleApis.Gmail.Message[]> {
     let messages: RosterMechanics.GoogleApis.Gmail.Message[] = []
 
-    const payload: { query: RosterMechanics.GoogleApis.Gmail.Request.Query.ListMessages } = {
+    const payload: {
+      query: RosterMechanics.GoogleApis.Gmail.Request.Query.ListMessages
+    } = {
       query: {
         includeSpamTrash: true,
         q: query,
@@ -238,7 +338,9 @@ export default class GmailApi implements IGmailApi {
       try {
         gmailMessagesApiResponse = (await this.googleSA.run({
           ...GmailApi.Endpoints().listMessages,
-          payload: payload as unknown as { query: RosterMechanics.GoogleApis.ServiceAccount.Request.Query },
+          payload: payload as unknown as {
+            query: RosterMechanics.GoogleApis.ServiceAccount.Request.Query
+          },
         })) as RosterMechanics.GoogleApis.Gmail.Response.Body.ListMessages
       } catch (err) {
         console.log('listMessages', err)

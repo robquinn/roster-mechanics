@@ -11,6 +11,7 @@ declare namespace RosterMechanics {
         type SaveUserSignature = (googleUserObj: RosterMechanics.GoogleApps.Admin.Schema.GoogleUser) => Promise<void>
         type SendNewHireEmail = (googleUserObj: RosterMechanics.GoogleApps.Admin.Schema.GoogleUser) => Promise<void>
         type SendWelcomeEmail = (googleUserObj: RosterMechanics.GoogleApps.Admin.Schema.GoogleUser) => Promise<void>
+        type SendwarmWelcomeEmail = (googleUserObj: RosterMechanics.GoogleApps.Admin.Schema.GoogleUser) => Promise<void>
       }
     }
   }

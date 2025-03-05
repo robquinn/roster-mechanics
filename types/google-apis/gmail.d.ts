@@ -2,6 +2,22 @@ declare namespace RosterMechanics {
   namespace GoogleApis {
     namespace Gmail {
       interface IGmailApi {
+        sendEmailAsUser: ({
+          fromEmail,
+          fromFirstName,
+          fromLastName,
+          toEmail,
+          subject,
+          body,
+        }: {
+          fromEmail: string
+          fromFirstName: string
+          fromLastName: string
+          toEmail: string
+          subject: string
+          body: string
+        }) => Promise<void>
+        getUserSignature: (userEmail: string) => Promise<string>
         listSendAs: () => Promise<Response.Body.ListSendAs>
         patchSendAs: ({
           firstName,
@@ -30,6 +46,8 @@ declare namespace RosterMechanics {
       interface Message extends GoogleAppsScript.Gmail.Schema.Message {}
       namespace Request {
         type Endpoints = Record<
+          | 'getUserSignature'
+          | 'sendEmail'
           | 'listSendAs'
           | 'patchSendAs'
           | 'createLabel'
@@ -66,6 +84,8 @@ declare namespace RosterMechanics {
 
       namespace Response {
         namespace Body {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+          interface GetUserSignature extends GoogleAppsScript.Gmail.Schema.SendAs {}
           // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
           interface ListSendAs extends GoogleAppsScript.Gmail.Schema.SendAs {}
           // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access

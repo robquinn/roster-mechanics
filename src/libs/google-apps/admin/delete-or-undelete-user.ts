@@ -1,3 +1,4 @@
+import RussLyonConfig from 'src/config/company/russ-lyon'
 import GoogleAppsScriptConfig from '../../../config/google/apps-script'
 import getSetDeletedUsers from '../../utils/cache/get-set-deleted-users'
 import getByEmail from './get-by-email'
@@ -15,6 +16,10 @@ const deleteOrUndeleteUser: RosterMechanics.GoogleApps.Admin.Fn.DeleteOrUndelete
       if (shouldDeleteUser) {
         getByEmail(latestResponse.email)
           .then(async (user) => {
+            // if primary email is robert.quinn@russlyon.com or derek.zieder@russlyon.com, do not suspend and stop the function
+            if ((await RussLyonConfig).sever.protected.includes(user.primaryEmail as string)) {
+              resolve({ user, action: 'void' })
+            }
             await getSetDeletedUsers({ email: user.primaryEmail as string, id: user.id as string })
             AdminDirectory.Users?.remove(latestResponse.email)
             resolve({ user, action: 'delete' })

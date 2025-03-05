@@ -10,6 +10,7 @@ import getByEmail from './get-by-email'
 import getByQuery from './get-by-query'
 import insertUser from './insert-user'
 import updateUser from './update-user'
+import sendWarmWelcomeEmail from '../../wrapper/gmail/send-warm-welcome-email'
 
 const upsertUser: RosterMechanics.GoogleApps.Admin.Fn.UpsertUser = async (
   googleUser: RosterMechanics.GoogleApps.Admin.IGoogleUser,
@@ -66,6 +67,7 @@ const upsertUser: RosterMechanics.GoogleApps.Admin.Fn.UpsertUser = async (
         await createJustListedFilter(googleUserObj)
         await createAgentDigestFilter(googleUserObj)
         await sendNewHireEmail(googleUserObj)
+        await sendWarmWelcomeEmail(googleUserObj)
         await saveCriticalNewHirePDF(googleUser)
         await sendWelcomeEmail(googleUserObj)
         await saveUserSignature(googleUserObj)

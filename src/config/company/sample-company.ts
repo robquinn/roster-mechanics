@@ -94,6 +94,7 @@ const SampleCompanyConfig: RosterMechanics.Config.Company.Sample = (async () => 
       },
       sever: {
         emails: ['sever.email.recipient.1@somedomain.com'],
+        protected: ['protected.from.sever.1@somedomain.com'],
       },
       calendars: {
         company: {

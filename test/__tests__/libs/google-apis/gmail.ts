@@ -26,6 +26,7 @@ describe('GmailApi', () => {
     await gmailApi.createFilter({
       query: (await EmailConfig).filters.justListed.query,
       labelName: (await EmailConfig).filters.justListed.labelName,
+      skipInbox: true,
     })
     expect(createLabelByGmailApiSpy).toHaveBeenCalled()
     expect(listAllUserGmailMessagesByQuerySpy).toHaveBeenCalled()

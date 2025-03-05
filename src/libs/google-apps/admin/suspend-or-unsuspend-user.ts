@@ -1,3 +1,4 @@
+import RussLyonConfig from 'src/config/company/russ-lyon'
 import SuspensionEmail from '../../emails/suspension'
 import ifEmptyThenNull from '../../utils/format/if-empty-then-null'
 import getByEmail from './get-by-email'
@@ -8,6 +9,11 @@ const suspendOrUnsuspendUser: RosterMechanics.GoogleApps.Admin.Fn.SuspendOrUnsus
   latestResponse: RosterMechanics.GoogleApps.Form.FormResponseSuspendObject,
 ): Promise<RosterMechanics.GoogleApps.Admin.Schema.GoogleUser> => {
   const user = await getByEmail(latestResponse.email)
+
+  // if primary email is robert.quinn@russlyon.com or derek.zieder@russlyon.com, do not suspend and stop the function
+  if ((await RussLyonConfig).sever.protected.includes(user.primaryEmail as string)) {
+    return await Promise.resolve(user)
+  }
 
   user.suspended = latestResponse.suspend === 'Suspend'
   ;(user.customSchemas as ICustomSchema).Roster.Sever_Date = await ifEmptyThenNull(latestResponse.severDate)

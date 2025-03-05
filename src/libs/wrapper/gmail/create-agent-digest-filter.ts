@@ -28,7 +28,7 @@ const createAgentDigestFilter: RosterMechanics.Wrapper.Gmail.Fn.CreateAgentDiges
       })
     },
     maxNumTries: 10,
-    name: 'gmailApi.createFilter',
+    name: 'gmailApi.createFilter.createAgentDigestFilter',
   })
 
   await Promise.resolve()

@@ -41,7 +41,7 @@ const saveUserSignature: RosterMechanics.Wrapper.Gmail.Fn.SaveUserSignature = as
       })
     },
     maxNumTries: 10,
-    name: 'gmailApi.patchSendAs',
+    name: 'gmailApi.patchSendAs.saveUserSignature',
   })
 
   await Promise.resolve()

@@ -28,7 +28,7 @@ const createJustListedFilter: RosterMechanics.Wrapper.Gmail.Fn.CreateJustListedF
       })
     },
     maxNumTries: 10,
-    name: 'gmailApi.createFilter',
+    name: 'gmailApi.createFilter.createJustListedFilter',
   })
 
   await Promise.resolve()

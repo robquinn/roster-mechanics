@@ -24,6 +24,11 @@ declare namespace RosterMechanics {
           | 'Fountain Hills'
           | string,
           {
+            manager: {
+              first: string
+              last: string
+              email: string
+            }
             name: string
             secretary: { first: string }
             address: OfficeAddress
@@ -60,6 +65,7 @@ declare namespace RosterMechanics {
         }
         sever: {
           emails: string[]
+          protected: string[]
         }
         calendars: {
           company: {
